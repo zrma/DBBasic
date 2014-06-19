@@ -1,0 +1,42 @@
+#wrapper div {
+    color : red;
+}
+
+#wrapper {
+    position:absolute;
+    left    : 20px;
+    top     : 30px;
+    padding : 20px;
+    font-size : 1.2em;
+}
+
+.container { margin: 25px auto; position: relative; width: 900px; }
+
+#content {
+    border : 1px solid gray;
+    margin : 0 auto;
+    padding : 25px 0 0;
+    position : relative;
+    text-align : center;
+    width : 500px;
+    background : #f9f9f9;
+}
+
+#content h1 {
+    color: #7E7E7E;
+    font: bold 25px Helvetica, Arial, sans-serif;
+    letter-spacing: -0.05em;
+    line-height: 20px;
+    margin: 10px 0 30px;
+}
+
+#content div {
+    margin : 5px 5px;
+    height : 50px;
+}
+
+#content div input{
+    top:10px;
+    width : 50%;
+    height: 50%
+}

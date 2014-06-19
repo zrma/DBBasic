@@ -1,0 +1,9 @@
+<!doctype html>
+<title>Main Page</title>
+<br><br><br><br><center>
+{% if user_name %}
+  <h1>Hello {{ user_name }}!</h1>
+{% else %}
+  <h1>Hello Anonymous!</h1>
+{% endif %}
+</center>
