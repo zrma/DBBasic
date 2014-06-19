@@ -140,7 +140,6 @@ csx
 AppPackages/
 
 # Others
-sql/
 *.Cache
 ClientBin/
 [Ss]tyle[Cc]op.*
@@ -213,5 +212,3 @@ pip-log.txt
 
 #Mr Developer
 .mr.developer.cfg
-
-.DS_Store
