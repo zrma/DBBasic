@@ -11,6 +11,9 @@ import datetime
 import hashlib
 import string, random
 
+import difflib
+from difflib import unified_diff
+
 dbhost = 'win.nhnnext.net'
 dbuser = 'db_user'
 dbpass = '1234'
@@ -148,7 +151,52 @@ def delete(input_uri):
 			pass
 		
 	return redirect(output)
+
+
+@app.route('/compare/<string:input_uri>', methods=['GET'])
+def compare(input_uri):
+	output = ''
+	contents_before = []
+	contents_after = []
 	
+	if 'username' in session:
+		output = output + '<a href = "/logout?request_uri=' + input_uri + '">Log Out</a>&nbsp;&nbsp;&nbsp;&nbsp;'
+		output = output + 'You signed in as ' + session['username'][1] + '&nbsp;&nbsp;'
+					
+		if session['username'][2] == 'admin':
+				output = output + '[admin]<br><br><br>'
+		else:
+			output = output + '[member]<br><br><br>'
+	else:
+		output = output + '<a href = "/login?request_uri=' + input_uri + '">Login</a>&nbsp;&nbsp;&nbsp;&nbsp;'
+		output = output + '<a href = "/join">Join</a><br><br><br>'
+			
+	try:
+		if request.method == 'GET':
+			before_index = request.args.get('before_index')
+			after_index = request.args.get('after_index')
+			
+			result_before = db.session.execute(text('CALL sp_history(:in1, :in2);', bindparams=[bindparam('in1', type_=Integer, value=before_index),bindparam('in2', type_=String, value=input_uri)])).fetchall()
+			result_after = db.session.execute(text('CALL sp_history(:in1, :in2);', bindparams=[bindparam('in1', type_=Integer, value=after_index),bindparam('in2', type_=String, value=input_uri)])).fetchall()
+			
+			output = output + 'Call Procedure Success<br><br>'
+
+			if result_before is not None:
+				for row in result_before:
+					contents_before.append(row['contents'])
+			
+			if result_after is not None:
+				for row in result_after:
+					contents_after.append(row['contents'])
+	except:
+		pass
+	
+	for line in unified_diff(contents_before, contents_after):
+		output = output + line + '<br>'
+	
+	return output + '<br>Meow!'
+
+
 @app.route('/history/<string:input_uri>', methods=['GET'])
 def history(input_uri):
 	output = ''
