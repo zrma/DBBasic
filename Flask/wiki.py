@@ -183,11 +183,13 @@ def compare(input_uri):
 
 			if result_before is not None:
 				for row in result_before:
-					contents_before.append(row['contents'])
+					# contents_before.append(row['contents'])
+					contents_before = row['contents'].splitlines()
 			
 			if result_after is not None:
 				for row in result_after:
-					contents_after.append(row['contents'])
+					# contents_after.append(row['contents'])
+					contents_after = row['contents'].splitlines()
 	except:
 		pass
 	
