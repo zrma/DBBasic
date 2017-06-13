@@ -399,15 +399,6 @@ CALL sp_block(유저인덱스, '블록대상ID');
 
 
 
-String addr = "jdbc:mysql://10.73.45.50/mydb";
-String user = "next";
-String pw = "1209";
-
-String addr = "jdbc:mysql://win.nhnnext.net/mydb";
-String user = "db_user";
-String pw = "1234";
-
-
 #################
 #### 구현 완료 ####
 #################
